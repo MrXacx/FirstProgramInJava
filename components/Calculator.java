@@ -1,58 +1,51 @@
-package FirstProgamInJava.components; // define pacote filho
-import FirstProgamInJava.components.IO; // importa classe-mãe de arquivo-irmão
+package FirstProgramInJava.components; // define pacote filho
+import FirstProgramInJava.components.IO; // importa classe-mãe de arquivo-irmão
 import java.io.IOException; // importa exceção especial de I/O
+import java.text.DecimalFormat;
 public class Calculator extends IO{ // classe herdeira de IO
-	private final int MIN_CALCULABLE = 0; // piso de cálculo
+	private final int MIN_CALCULABLE = 1; // piso de cálculo
 	private final int MAX_CALCULABLE = 10; // teto de cálculo
-    private double[] results = new double[11];
-    protected String operator;
+    public String results = "";
+    private DecimalFormat formatter;
     public Calculator() throws IOException{ // método construtor
 		super(); // executa construtor de classe-mãe
 		super.init(); // executa método init da classe-mãe
+		formatter = new DecimalFormat("#.##");
     }
     public void execute() {
         switch(super.operator){ // define a operação desejada
             case "+":
-                this.sum();
+                this.addition();
                 break;
             case "-":
-                this.sub();
+                this.subtraction();
                 break;
             case "x":
-                this.mult();
+                this.multiplication();
                 break;
             case "/":
-                this.div();
+                this.division();
                 break;
         }
     }
-    private void sum(){ // soma
+    private void addition(){
         for(int count=MIN_CALCULABLE; count<=MAX_CALCULABLE; count++){
-            this.results[count] = super.number + count;
+            this.results += this.number + " + " + count + " = " + formatter.format(this.number+count) +"\n";
         }
     }
-    private void sub(){ // subtração
+    private void subtraction(){
         for(int count=MIN_CALCULABLE; count<=MAX_CALCULABLE; count++){
-            this.results[count] = super.number - count;
+            this.results += formatter.format(this.number+count) + " - " + this.number + " = " + count  +"\n";
         }
     }
-    private void mult(){ // multiplicação
+    private void multiplication(){
         for(int count=MIN_CALCULABLE; count<=MAX_CALCULABLE; count++){
-            this.results[count] = super.number * count ;
+            this.results += this.number + " x " + count + " = " + formatter.format(this.number*count) +"\n";
         }
     }
-    private void div(){ // divisão
-    	this.results = new double[10]; // redimensiona array ( não existe n/0)
-        for(int count=MIN_CALCULABLE+1; count<=MAX_CALCULABLE; count++){
-            this.results[count-1] = super.number / count;
+    private void division(){
+        for(int count=MIN_CALCULABLE; count<=MAX_CALCULABLE; count++){
+            this.results += formatter.format(this.number*count) + " / " + this.number + " = " + count  +"\n";
         }
-    }
-    public void printResults(){
-    	super.output.print("\n\n");
-    	int count = super.operator == "/" ? 1 : 0; // define início da contagem
-    	for(double result : this.results){ // itera array como foreach()
-    		super.output.println(super.number+" "+super.operator+" "+count+" = "+ super.decFormat.format(result));
-    		 count++;
-    	}
     }
 }

@@ -6,15 +6,15 @@
 	* Requisitos: Java 11.0.2
 */
 
-package FirstProgamInJava; // define pacote raíz
-import FirstProgamInJava.components.Calculator; // importa class de cálculo
+package FirstProgramInJava; // define pacote raíz
+import FirstProgramInJava.components.Calculator; // importa class de cálculo
 import java.io.IOException; // importa exceção expeciaal de I/O
 public class Core{ // núcleo de execução
 	public static void main(String[] args){
 		try{
 			Calculator calculator = new Calculator();
 			calculator.execute(); // executa cálculos
-			calculator.printResults(); // exibe cálculos
+			calculator.print(calculator.results);
 		}
 		catch(Exception e){ // controla exceções
 			System.out.print("\n\n*** " +e+" ***\n\n"); // exibe exceção
